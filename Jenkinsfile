@@ -6,13 +6,13 @@ pipeline {
     stages { 
         stage('SCM Checkout') {
             steps{
-            git 'https://github.com/praveen048/docker-sample.git'
+            git branch: 'main', credentialsId: 'docker-new', url: 'https://github.com/praveen048/docker-sample.git'
             }
         }
 
         stage('Build docker image') {
             steps {  
-                sh 'docker build -t praveen/nodeapp:$BUILD_NUMBER .'
+                sh 'docker build -t praveen418/nodeapp:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push praveen/nodeapp:$BUILD_NUMBER'
+                sh 'docker push praveen418/nodeapp:$BUILD_NUMBER'
             }
         }
 }
